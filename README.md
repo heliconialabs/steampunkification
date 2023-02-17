@@ -116,17 +116,17 @@ Notes and snippets for Steampunk compatibility.
   ENDMETHOD.
 ```
 
-### IXML
+## IXML
 
 Most classes and methods exists, but with "_CORE" postfix
 
 eg. use `CL_IXML_CORE` instead of `CL_IXML`
 
-### HTTP Client
+## HTTP Client
 
 todo, https://github.com/open-abap/cross-http-client
 
-### DESCRIBE FIELD IN CHARACTER MODE
+## DESCRIBE FIELD IN CHARACTER MODE
 
 replace
 
@@ -136,7 +136,7 @@ with
 
 `lv_length = cl_abap_typedescr=>describe_by_data( <lg_line> )->length.`
 
-### DESCRIBE FIELD TYPE
+## DESCRIBE FIELD TYPE
 
 replace
 
@@ -146,11 +146,11 @@ with
 
 `foo = cl_abap_typedescr=>describe_by_data( <lg_line> )->type_kind.`
 
-### GET RUN TIME
+## GET RUN TIME
 
 ??
 
-### cl_http_utility=>unescape_url
+## cl_http_utility=>unescape_url
 
 Replace `cl_http_utility=>unescape_url` with `cl_web_http_utility=>unescape_url`
 
