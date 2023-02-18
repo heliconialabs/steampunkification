@@ -32,6 +32,7 @@ Notes and snippets for Steampunk compatibility.
           IMPORTING
             data  = string.
     ENDTRY.
+  ENDMETHOD.
 ```
 
 ## STRING to XSTRING utf8 conversion
