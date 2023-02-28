@@ -71,6 +71,7 @@ Notes and snippets for Steampunk compatibility.
 ```
 ## Create UUID in c32
 
+```abap
 METHOD get_uuid.
 
          DATA uuid TYPE sysuuid_c32.
@@ -89,6 +90,7 @@ METHOD get_uuid.
          ENDTRY.
 
 ENDMETHOD.
+```
 
 ## List key fields of a database table
 
