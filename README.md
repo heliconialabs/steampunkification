@@ -69,6 +69,28 @@ Notes and snippets for Steampunk compatibility.
 
   ENDMETHOD.
 ```
+## Create UUID in c32
+
+```abap
+METHOD get_uuid.
+
+         DATA uuid TYPE sysuuid_c32.
+
+         TRY.
+             CALL METHOD ('CL_SYSTEM_UUID')=>create_uuid_c32_static
+               RECEIVING
+                 uuid = uuid.
+
+           CATCH cx_sy_dyn_call_illegal_class.
+             DATA lv_fm TYPE string.
+             lv_fm = 'GUID_CREATE'.
+             CALL FUNCTION lv_fm
+               IMPORTING
+                 ev_guid_32 = uuid.
+         ENDTRY.
+
+ENDMETHOD.
+```
 
 ## List key fields of a database table
 
