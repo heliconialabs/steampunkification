@@ -3,6 +3,7 @@ Notes and snippets for Steampunk compatibility.
 
 | On-Prem  | Steampunk  |
 |---|---|
+| ARBGB | SYMSGID |
 | CL_ABAP_CODEPAGE | CL_ABAP_CONV_CODEPAGE |
 | CL_ABAP_CONV_IN_CE | CL_ABAP_CONV_CODEPAGE |
 | CL_ABAP_CONV_OUT_CE | CL_ABAP_CONV_CODEPAGE |
@@ -10,6 +11,7 @@ Notes and snippets for Steampunk compatibility.
 | CL_HTTP_CLIENT | CL_HTTP_DESTINATION_PROVIDER |
 | CL_HTTP_UTILITY | CL_WEB_HTTP_UTILITY |
 | CL_IXML | CL_IXML_CORE |
+| DATUM | XSDDATE_D |
 | DEVCLASS | I_CustABAPObjDirectoryEntry-ABAPPackage |
 | FLAG_X | ABAP_BOOLEAN |
 | FUNCNAME | SXCO_FM_NAME |
@@ -20,6 +22,7 @@ Notes and snippets for Steampunk compatibility.
 | IF_IXML_RENDERER | IF_IXML_RENDERER_CORE |
 | IF_IXML_STREAM_FACTORY | IF_IXML_STREAM_FACTORY_CORE |
 | LOWERCASE | ABAP_BOOLEAN |
+| MSGNR | SYMSGNO |
 | MSGV1 | SYMSGV |
 | MSGV2 | SYMSGV |
 | MSGV3 | SYMSGV |
