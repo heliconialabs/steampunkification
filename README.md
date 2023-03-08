@@ -3,6 +3,7 @@ Notes and snippets for Steampunk compatibility.
 
 | On-Prem  | Steampunk  |
 |---|---|
+| CL_ABAP_CODEPAGE | CL_ABAP_CONV_CODEPAGE |
 | CL_ABAP_CONV_IN_CE | CL_ABAP_CONV_CODEPAGE |
 | CL_ABAP_CONV_OUT_CE | CL_ABAP_CONV_CODEPAGE |
 | CL_HTTP_CLIENT | CL_HTTP_DESTINATION_PROVIDER |
