@@ -1,6 +1,31 @@
 # steampunkification
 Notes and snippets for Steampunk compatibility.
 
+| On-Prem  | Steampunk  |
+|---|---|
+| CL_ABAP_CONV_IN_CE | CL_ABAP_CONV_CODEPAGE |
+| CL_ABAP_CONV_OUT_CE | CL_ABAP_CONV_CODEPAGE |
+| CL_HTTP_CLIENT | CL_HTTP_DESTINATION_PROVIDER |
+| CL_HTTP_UTILITY | CL_WEB_HTTP_UTILITY |
+| CL_IXML | CL_IXML_CORE |
+| DEVCLASS | I_CustABAPObjDirectoryEntry-ABAPPackage |
+| FLAG_X | ABAP_BOOLEAN |
+| FUNCNAME | SXCO_FM_NAME |
+| IF_IXML_ISTREAM | IF_IXML_ISTREAM_CORE |
+| IF_IXML_OSTREAM | IF_IXML_OSTREAM_CORE |
+| IF_IXML_PARSE_ERROR | IF_IXML_PARSE_ERROR_CORE |
+| IF_IXML_PARSER | IF_IXML_PARSER_CORE |
+| IF_IXML_RENDERER | IF_IXML_RENDERER_CORE |
+| IF_IXML_STREAM_FACTORY | IF_IXML_STREAM_FACTORY_CORE |
+| LOWERCASE | ABAP_BOOLEAN |
+| MSGV1 | SYMSGV |
+| MSGV2 | SYMSGV |
+| MSGV3 | SYMSGV |
+| MSGV4 | SYMSGV |
+| SAP_BOOL | ABAP_BOOLEAN |
+| TADIR | I_CustABAPObjDirectoryEntry	 |
+| TRKORR | SXCO_TRANSPORT |
+
 ## XSTRING to STRING utf8 conversion
 
 ```abap
@@ -139,16 +164,6 @@ ENDMETHOD.
   ENDMETHOD.
 ```
 
-## IXML
-
-Most classes and methods exists, but with "_CORE" postfix
-
-eg. use `CL_IXML_CORE` instead of `CL_IXML`
-
-## HTTP Client
-
-todo, https://github.com/open-abap/cross-http-client
-
 ## DESCRIBE FIELD IN CHARACTER MODE
 
 replace
@@ -172,11 +187,3 @@ with
 ## GET RUN TIME
 
 ??
-
-## cl_http_utility=>unescape_url
-
-Replace `cl_http_utility=>unescape_url` with `cl_web_http_utility=>unescape_url`
-
-## TADIR
-
-use `I_CustABAPObjDirectoryEntry` instead
