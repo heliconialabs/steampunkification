@@ -36,90 +36,89 @@ Notes and snippets for Steampunk compatibility.
 ## XSTRING to STRING utf8 conversion
 
 ```abap
-  METHOD from_xstring.
+METHOD from_xstring.
 
-    DATA conv TYPE REF TO object.
+  DATA conv TYPE REF TO object.
 
-    TRY.
-        CALL METHOD ('CL_ABAP_CONV_CODEPAGE')=>create_in
-          RECEIVING
-            instance = conv.
+  TRY.
+      CALL METHOD ('CL_ABAP_CONV_CODEPAGE')=>create_in
+        RECEIVING
+          instance = conv.
 
-        CALL METHOD conv->('IF_ABAP_CONV_IN~CONVERT')
-          EXPORTING
-            source = xstring
-          RECEIVING
-            result = string.
-      CATCH cx_sy_dyn_call_illegal_class.
-        DATA(conv_in_class) = 'CL_ABAP_CONV_IN_CE'.
-        CALL METHOD (conv_in_class)=>create
-          EXPORTING
-            encoding = 'UTF-8'
-          RECEIVING
-            conv     = conv.
+      CALL METHOD conv->('IF_ABAP_CONV_IN~CONVERT')
+        EXPORTING
+          source = xstring
+        RECEIVING
+          result = string.
+    CATCH cx_sy_dyn_call_illegal_class.
+      DATA(conv_in_class) = 'CL_ABAP_CONV_IN_CE'.
+      CALL METHOD (conv_in_class)=>create
+        EXPORTING
+          encoding = 'UTF-8'
+        RECEIVING
+          conv     = conv.
 
-        CALL METHOD conv->('CONVERT')
-          EXPORTING
-            input = xstring
-          IMPORTING
-            data  = string.
-    ENDTRY.
-  ENDMETHOD.
+      CALL METHOD conv->('CONVERT')
+        EXPORTING
+          input = xstring
+        IMPORTING
+          data  = string.
+  ENDTRY.
+ENDMETHOD.
 ```
 
 ## STRING to XSTRING utf8 conversion
 
 ```abap
-  METHOD to_xstring.
+METHOD to_xstring.
 
-    DATA conv TYPE REF TO object.
+  DATA conv TYPE REF TO object.
 
-    TRY.
-        CALL METHOD ('CL_ABAP_CONV_CODEPAGE')=>create_out
-          RECEIVING
-            instance = conv.
+  TRY.
+      CALL METHOD ('CL_ABAP_CONV_CODEPAGE')=>create_out
+        RECEIVING
+          instance = conv.
 
-        CALL METHOD conv->('IF_ABAP_CONV_OUT~CONVERT')
-          EXPORTING
-            source = string
-          RECEIVING
-            result = xstring.
-      CATCH cx_sy_dyn_call_illegal_class.
-        DATA(conv_out_class) = 'CL_ABAP_CONV_OUT_CE'.
-        CALL METHOD (conv_out_class)=>create
-          EXPORTING
-            encoding = 'UTF-8'
-          RECEIVING
-            conv     = conv.
+      CALL METHOD conv->('IF_ABAP_CONV_OUT~CONVERT')
+        EXPORTING
+          source = string
+        RECEIVING
+          result = xstring.
+    CATCH cx_sy_dyn_call_illegal_class.
+      DATA(conv_out_class) = 'CL_ABAP_CONV_OUT_CE'.
+      CALL METHOD (conv_out_class)=>create
+        EXPORTING
+          encoding = 'UTF-8'
+        RECEIVING
+          conv     = conv.
 
-        CALL METHOD conv->('CONVERT')
-          EXPORTING
-            data   = string
-          IMPORTING
-            buffer = xstring.
-    ENDTRY.
+      CALL METHOD conv->('CONVERT')
+        EXPORTING
+          data   = string
+        IMPORTING
+          buffer = xstring.
+  ENDTRY.
 
-  ENDMETHOD.
+ENDMETHOD.
 ```
 ## Create UUID in c32
 
 ```abap
 METHOD get_uuid.
 
-         DATA uuid TYPE sysuuid_c32.
+  DATA uuid TYPE sysuuid_c32.
 
-         TRY.
-             CALL METHOD ('CL_SYSTEM_UUID')=>create_uuid_c32_static
-               RECEIVING
-                 uuid = uuid.
-
-           CATCH cx_sy_dyn_call_illegal_class.
-             DATA lv_fm TYPE string.
-             lv_fm = 'GUID_CREATE'.
-             CALL FUNCTION lv_fm
-               IMPORTING
-                 ev_guid_32 = uuid.
-         ENDTRY.
+  TRY.
+      CALL METHOD ('CL_SYSTEM_UUID')=>create_uuid_c32_static
+        RECEIVING
+          uuid = uuid.
+    CATCH cx_sy_dyn_call_illegal_class.
+      DATA lv_fm TYPE string.
+      lv_fm = 'GUID_CREATE'.
+      CALL FUNCTION lv_fm
+        IMPORTING
+          ev_guid_32 = uuid.
+  ENDTRY.
 
 ENDMETHOD.
 ```
@@ -169,6 +168,34 @@ ENDMETHOD.
     ENDTRY.
 
   ENDMETHOD.
+```
+
+## Get table delivery class
+
+```abap
+DATA lv_contflag TYPE c LENGTH 1.
+
+DATA lo_table          TYPE REF TO object.
+DATA lo_content        TYPE REF TO object.
+DATA lo_delivery_class TYPE REF TO object.
+FIELD-SYMBOLS <any>    TYPE any.
+TRY.
+    CALL METHOD ('XCO_CP_ABAP_DICTIONARY')=>database_table
+      EXPORTING
+        iv_name           = 'ZHVAM_CUST'
+      RECEIVING
+        ro_database_table = lo_table.
+    CALL METHOD lo_table->('IF_XCO_DATABASE_TABLE~CONTENT')
+      RECEIVING
+        ro_content = lo_content.
+    CALL METHOD lo_content->('IF_XCO_DBT_CONTENT~GET_DELIVERY_CLASS')
+      RECEIVING
+        ro_delivery_class = lo_delivery_class.
+    ASSIGN lo_delivery_class->('VALUE') TO <any>.
+    lv_contflag = <any>.
+  CATCH cx_sy_dyn_call_illegal_class.
+    SELECT SINGLE contflag FROM ('DD02L') WHERE tabname = 'ZHVAM_CUST' INTO @lv_contflag.
+ENDTRY.
 ```
 
 ## DESCRIBE FIELD IN CHARACTER MODE
