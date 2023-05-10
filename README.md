@@ -144,7 +144,10 @@ ENDMETHOD.
           RECEIVING
             ro_database_table = obj.
         ASSIGN obj->('IF_XCO_DATABASE_TABLE~FIELDS->IF_XCO_DBT_FIELDS_FACTORY~KEY') TO <any>.
-        ASSERT sy-subrc = 0.
+        IF sy-subrc  <> 0.
+* fallback to RTTI, KEY field does not exist in S/4 2020
+          RAISE EXCEPTION TYPE cx_sy_dyn_call_illegal_class.
+        ENDIF.
         obj = <any>.
         CALL METHOD obj->('IF_XCO_DBT_FIELDS~GET_NAMES')
           RECEIVING
