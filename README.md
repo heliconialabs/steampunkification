@@ -29,6 +29,7 @@ Notes and snippets for Steampunk compatibility.
 | MSGV4 | SYMSGV |
 | SAP_BOOL | ABAP_BOOLEAN |
 | SUBRC | SYSUBRC |
+| PROGRAMM | SYREPID |
 | T002 | I_Language |
 | T002T | I_LanguageText |
 | TADIR | I_CustABAPObjDirectoryEntry	 |
