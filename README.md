@@ -125,7 +125,7 @@ METHOD get_uuid.
 ENDMETHOD.
 ```
 
-## decode base64
+## Decode base64
 ```abap
   METHOD decode_x_base64.
 
@@ -151,7 +151,7 @@ ENDMETHOD.
   ENDMETHOD.
 ```
 
-## encode base64
+## Encode base64
 ```abap
   METHOD encode_x_base64.
 
