@@ -125,6 +125,58 @@ METHOD get_uuid.
 ENDMETHOD.
 ```
 
+## Decode base64
+```abap
+  METHOD decode_x_base64.
+
+    TRY.
+
+        CALL METHOD ('CL_WEB_HTTP_UTILITY')=>('DECODE_X_BASE64')
+          EXPORTING
+            encoded = val
+          RECEIVING
+            decoded = result.
+
+      CATCH cx_sy_dyn_call_illegal_class.
+
+        DATA(classname) = 'CL_HTTP_UTILITY'.
+        CALL METHOD (classname)=>('DECODE_X_BASE64')
+          EXPORTING
+            encoded = val
+          RECEIVING
+            decoded = result.
+
+    ENDTRY.
+
+  ENDMETHOD.
+```
+
+## Encode base64
+```abap
+  METHOD encode_x_base64.
+
+    TRY.
+
+        CALL METHOD ('CL_WEB_HTTP_UTILITY')=>('ENCODE_X_BASE64')
+          EXPORTING
+            unencoded = val
+          RECEIVING
+            encoded   = result.
+
+      CATCH cx_sy_dyn_call_illegal_class.
+
+        DATA(classname) = 'CL_HTTP_UTILITY'.
+        CALL METHOD (classname)=>('ENCODE_X_BASE64')
+          EXPORTING
+            unencoded = val
+          RECEIVING
+            encoded   = result.
+
+    ENDTRY.
+
+  ENDMETHOD.
+```
+
 ## List key fields of a database table
 
 ```abap
