@@ -296,6 +296,54 @@ with
 
 `foo = cl_abap_typedescr=>describe_by_data( <lg_line> )->type_kind.`
 
-## GET RUN TIME
+## Convert language to iso code language
 
-??
+```abap
+    DATA input  TYPE spras.
+    DATA result TYPE laiso.
+
+    DATA lv_class TYPE string.
+    lv_class = 'CL_I18N_LANGUAGES'.
+
+    input = 'E'.
+
+    TRY.
+        SELECT SINGLE LanguageISOCode FROM ('I_LANGUAGE')
+          WHERE language = @input INTO @result.
+      CATCH cx_sy_dynamic_osql_error.
+        CALL METHOD (lv_class)=>sap1_to_sap2
+          EXPORTING
+            im_lang_sap1  = input
+          RECEIVING
+            re_lang_sap2  = result
+          EXCEPTIONS
+            no_assignment = 1
+            OTHERS        = 2.
+    ENDTRY.
+```
+
+## Convert iso code language to language
+
+```abap
+    DATA input  TYPE laiso.
+    DATA result TYPE spras.
+
+    DATA lv_class TYPE string.
+    lv_class = 'CL_I18N_LANGUAGES'.
+
+    input = 'E'.
+
+    TRY.
+        SELECT SINGLE language FROM ('I_LANGUAGE')
+          WHERE LanguageISOCode = @input INTO @result.
+      CATCH cx_sy_dynamic_osql_error.
+        CALL METHOD (lv_class)=>sap2_to_sap1
+          EXPORTING
+            im_lang_sap2  = input
+          RECEIVING
+            re_lang_sap1  = result
+          EXCEPTIONS
+            no_assignment = 1
+            OTHERS        = 2.
+    ENDTRY.
+```
