@@ -284,7 +284,7 @@ replace
 
 with
 
-`lv_length = cl_abap_typedescr=>describe_by_data( <lg_line> )->length.`
+`lv_length = cl_abap_typedescr=>describe_by_data( <lg_line> )->length / cl_abap_char_utilities=>charsize.`
 
 ## DESCRIBE FIELD TYPE
 
