@@ -27,6 +27,7 @@ Notes and snippets for Steampunk compatibility.
 | MSGV2 | SYMSGV |
 | MSGV3 | SYMSGV |
 | MSGV4 | SYMSGV |
+| TABLE_OF_STRINGS | STRING_TABLE |
 | SAP_BOOL | ABAP_BOOLEAN |
 | SUBRC | SYSUBRC |
 | PROGRAMM | SYREPID |
