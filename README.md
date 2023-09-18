@@ -35,6 +35,7 @@ Notes and snippets for Steampunk compatibility.
 | T002T | I_LanguageText |
 | TADIR | I_CustABAPObjDirectoryEntry	 |
 | TRKORR | SXCO_TRANSPORT |
+| OPTION | BAPIOPTION |
 
 ## XSTRING to STRING utf8 conversion
 
