@@ -349,3 +349,14 @@ with
             OTHERS        = 2.
     ENDTRY.
 ```
+
+## Find ABAP Language Version for running program
+
+```abap
+  TRY.
+    cl_abap_typedescr=>describe_by_name( 'T100' ).
+    out->write( 'Classic' ).
+  CATCH cx_root.
+    out->write( 'ABAP Cloud' ).
+  ENDTRY.
+```
