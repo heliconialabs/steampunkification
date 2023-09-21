@@ -360,3 +360,25 @@ with
     out->write( 'ABAP Cloud' ).
   ENDTRY.
 ```
+
+Alternative:
+
+```abap
+DATA program      TYPE c LENGTH 40 VALUE sy-repid.
+DATA abap_version TYPE string.
+
+OVERLAY program WITH '==============================CP'.
+
+TRY.
+    SELECT SINGLE FROM ('PROGDIR')
+      FIELDS CASE uccheck
+               WHEN 'X' THEN 'Classic'
+               WHEN '5' THEN 'Cloud'
+             END
+      WHERE name = @program
+        AND state = 'A'
+      INTO @abap_version.
+  CATCH cx_sy_dynamic_osql_error.
+    abap_version = 'Cloud'.
+ENDTRY.
+```
