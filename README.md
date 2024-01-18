@@ -27,6 +27,8 @@ Notes and snippets for Steampunk compatibility.
 | MSGV2 | SYMSGV |
 | MSGV3 | SYMSGV |
 | MSGV4 | SYMSGV |
+| TABLE_OF_STRINGS | STRING_TABLE |
+| STRING_T | STRING_TABLE |
 | SAP_BOOL | ABAP_BOOLEAN |
 | SUBRC | SYSUBRC |
 | PROGRAMM | SYREPID |
@@ -34,6 +36,7 @@ Notes and snippets for Steampunk compatibility.
 | T002T | I_LanguageText |
 | TADIR | I_CustABAPObjDirectoryEntry	 |
 | TRKORR | SXCO_TRANSPORT |
+| OPTION | BAPIOPTION |
 
 ## XSTRING to STRING utf8 conversion
 
@@ -284,7 +287,7 @@ replace
 
 with
 
-`lv_length = cl_abap_typedescr=>describe_by_data( <lg_line> )->length.`
+`lv_length = cl_abap_typedescr=>describe_by_data( <lg_line> )->length / cl_abap_char_utilities=>charsize.`
 
 ## DESCRIBE FIELD TYPE
 
@@ -296,6 +299,87 @@ with
 
 `foo = cl_abap_typedescr=>describe_by_data( <lg_line> )->type_kind.`
 
-## GET RUN TIME
+## Convert language to iso code language
 
-??
+```abap
+    DATA input  TYPE spras.
+    DATA result TYPE laiso.
+
+    DATA lv_class TYPE string.
+    lv_class = 'CL_I18N_LANGUAGES'.
+
+    input = 'E'.
+
+    TRY.
+        SELECT SINGLE LanguageISOCode FROM ('I_LANGUAGE')
+          WHERE language = @input INTO @result.
+      CATCH cx_sy_dynamic_osql_error.
+        CALL METHOD (lv_class)=>sap1_to_sap2
+          EXPORTING
+            im_lang_sap1  = input
+          RECEIVING
+            re_lang_sap2  = result
+          EXCEPTIONS
+            no_assignment = 1
+            OTHERS        = 2.
+    ENDTRY.
+```
+
+## Convert iso code language to language
+
+```abap
+    DATA input  TYPE laiso.
+    DATA result TYPE spras.
+
+    DATA lv_class TYPE string.
+    lv_class = 'CL_I18N_LANGUAGES'.
+
+    input = 'E'.
+
+    TRY.
+        SELECT SINGLE language FROM ('I_LANGUAGE')
+          WHERE LanguageISOCode = @input INTO @result.
+      CATCH cx_sy_dynamic_osql_error.
+        CALL METHOD (lv_class)=>sap2_to_sap1
+          EXPORTING
+            im_lang_sap2  = input
+          RECEIVING
+            re_lang_sap1  = result
+          EXCEPTIONS
+            no_assignment = 1
+            OTHERS        = 2.
+    ENDTRY.
+```
+
+## Find ABAP Language Version for running program
+
+```abap
+  TRY.
+    cl_abap_typedescr=>describe_by_name( 'T100' ).
+    out->write( 'Classic' ).
+  CATCH cx_root.
+    out->write( 'ABAP Cloud' ).
+  ENDTRY.
+```
+
+Alternative:
+
+```abap
+DATA program      TYPE c LENGTH 40 VALUE sy-repid.
+DATA abap_version TYPE string.
+
+OVERLAY program WITH '==============================CP'.
+
+TRY.
+    SELECT SINGLE FROM ('PROGDIR')
+      FIELDS CASE uccheck
+               WHEN 'X' THEN 'Classic'
+               WHEN '5' THEN 'Cloud'
+             END
+      WHERE name = @program
+        AND state = 'A'
+      INTO @abap_version.
+  CATCH cx_sy_dynamic_osql_error.
+    abap_version = 'Cloud'.
+ENDTRY.
+```
