@@ -446,7 +446,7 @@ ENDTRY.
 
   ENDMETHOD.
 ```
-## Read the Source Code of a Mehtod of A Class
+## Read the Source Code of a Method of a Class
 ```abap
     data(result) = value string_table( ).
     DATA object TYPE REF TO object.
