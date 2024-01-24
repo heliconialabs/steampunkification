@@ -448,7 +448,7 @@ ENDTRY.
 ```
 ## Read the Source Code of a Method of a Class
 ```abap
-    data(result) = value string_table( ).
+    DATA(result) = VALUE string_table( ).
     DATA object TYPE REF TO object.
     FIELD-SYMBOLS <any> TYPE any.
     DATA lt_source TYPE string_table.
