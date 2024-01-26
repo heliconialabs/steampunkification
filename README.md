@@ -398,9 +398,15 @@ ENDTRY.
 
         FIELD-SYMBOLS <any> TYPE any.
         ASSIGN obj->('IF_XCO_AO_INTERFACE~IMPLEMENTATIONS') TO <any>.
+        IF sy-subrc <> 0.
+          RAISE EXCEPTION TYPE cx_sy_dyn_call_illegal_class.
+        ENDIF.
         obj = <any>.
 
         ASSIGN obj->('IF_XCO_INTF_IMPLEMENTATIONS_FC~ALL') TO <any>.
+        IF sy-subrc <> 0.
+          RAISE EXCEPTION TYPE cx_sy_dyn_call_illegal_class.
+        ENDIF.
         obj = <any>.
 
         CALL METHOD obj->('IF_XCO_INTF_IMPLEMENTATIONS~GET').
