@@ -1,6 +1,8 @@
 # steampunkification
 Notes and snippets for Steampunk compatibility.
 
+Snippets are compatible with both classic ABAP and ABAP Cloud Programming model, dont use the snippets if targeting only Classic or Cloud.
+
 | On-Prem  | Steampunk  |
 |---|---|
 | ARBGB | SYMSGID |
