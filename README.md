@@ -40,6 +40,7 @@ Snippets are compatible with both classic ABAP and ABAP Cloud Programming model,
 | TADIR | I_CustABAPObjDirectoryEntry	 |
 | TRKORR | SXCO_TRANSPORT |
 | OPTION | BAPIOPTION |
+| SYST_MSGV | SYMSGV |
 
 ## XSTRING to STRING utf8 conversion
 
