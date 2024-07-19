@@ -41,6 +41,7 @@ Snippets are compatible with both classic ABAP and ABAP Cloud Programming model,
 | TRKORR | SXCO_TRANSPORT |
 | OPTION | BAPIOPTION |
 | SYST_MSGV | SYMSGV |
+| BAPIRET2_T | BAPIRETTAB |
 
 ## XSTRING to STRING utf8 conversion
 
