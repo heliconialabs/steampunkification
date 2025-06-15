@@ -191,6 +191,8 @@ ENDMETHOD.
   METHOD list_key_fields.
     DATA obj TYPE REF TO object.
     DATA lv_tabname TYPE c LENGTH 16.
+    TYPES ty_c30 TYPE c LENGTH 30.
+    DATA names TYPE STANDARD TABLE OF ty_c30 WITH EMPTY KEY.
     DATA lr_ddfields TYPE REF TO data.
     FIELD-SYMBOLS <any> TYPE any.
     FIELD-SYMBOLS <field> TYPE simple.
