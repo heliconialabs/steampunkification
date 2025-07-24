@@ -679,7 +679,7 @@ https://github.com/larshp/uccp
 ```
 
 ## Read Callstack
-
+__cloud only, wip ABAP Standard__
 ```abap
     TRY.
 
@@ -727,14 +727,10 @@ https://github.com/larshp/uccp
           RECEIVING
             ro_full = full_stack.
 
-        ASSIGN format_source TO <any>.
-        DATA object TYPE REF TO object.
-        object = format_source.
-
         DATA r TYPE REF TO data.
         CREATE DATA r TYPE REF TO ('IF_XCO_CS_FORMAT').
         ASSIGN r->* TO <any>.
-        <any> ?= object.
+        <any> ?= format_source.
 
         CALL METHOD full_stack->('IF_XCO_CP_CALL_STACK~AS_TEXT')
           EXPORTING
@@ -750,7 +746,7 @@ https://github.com/larshp/uccp
         ASSIGN ro_lines->('IF_XCO_STRINGS~VALUE') TO <lt_lines>.
 
       CATCH cx_root INTO DATA(x).
-        DATA(lv_error) = x->get_text( ).
+        "TODO ABAP Standard
     ENDTRY.
 
 ```
